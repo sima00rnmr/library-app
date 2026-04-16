@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>返却</title>
+</head>
+<body>
+
+<h2>返却</h2>
+
+<button onclick="startScan()">QR読み取り</button>
+
+<div id="reader" style="width:300px;"></div>
+
+<p>読み取り結果: <span id="result"></span></p>
+
+<button onclick="returnBook()">返却する</button>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="/js/return.js"></script>
+
+</body>
+</html>
