@@ -1,14 +1,17 @@
 package com.example.library.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.library.dto.RentalRequest;
+import com.example.library.dto.RentalView;
 import com.example.library.entity.Book;
 import com.example.library.entity.Rental;
 import com.example.library.repository.BookRepository;
@@ -72,5 +75,21 @@ public class RentalController {
         bookRepository.save(book);
 
         return "返却完了";
+    }
+    @GetMapping("/active")
+    public List<RentalView> getActiveRentals() {
+
+        List<Rental> rentals = rentalRepository.findByReturnedAtIsNull();
+
+        return rentals.stream().map(r -> {
+            Book book = bookRepository.findById(r.getBookId()).orElse(null);
+
+            RentalView v = new RentalView();
+            v.setBookTitle(book.getTitle());
+            v.setQrCode(book.getQrCode());
+            v.setUserId(r.getUserId());
+
+            return v;
+        }).toList();
     }
 }

@@ -1,4 +1,44 @@
-<h1>図書管理</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>図書管理システム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            padding-top: 50px;
+        }
 
-<a href="/rent.html">貸出</a><br>
-<a href="/return.html">返却</a>
+        .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 20px;
+            width: 200px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn.return {
+            background-color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📚 図書管理</h1>
+
+<button class="btn" onclick="location.href='/rent/'">
+    貸出
+</button>
+
+<button class="btn return" onclick="location.href='/return/'">
+    返却
+</button>
+
+</body>
+</html>
