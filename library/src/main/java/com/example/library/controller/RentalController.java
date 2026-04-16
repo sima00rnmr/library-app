@@ -50,4 +50,27 @@ public class RentalController {
 
         return "貸出完了";
     }
+    
+    @PostMapping("/return")
+    public String returnBook(@RequestBody RentalRequest request) {
+
+        // ① 本取得
+        Book book = bookRepository.findByQrCode(request.getQrCode())
+                .orElseThrow(() -> new RuntimeException("本が見つからない"));
+
+        // ② 貸出中データ取得
+        Rental rental = rentalRepository
+                .findByBookIdAndReturnedAtIsNull(book.getId())
+                .orElseThrow(() -> new RuntimeException("貸出中データなし"));
+
+        // ③ 返却日時設定
+        rental.setReturnedAt(LocalDateTime.now());
+        rentalRepository.save(rental);
+
+        // ④ 本の状態戻す
+        book.setStatus("AVAILABLE");
+        bookRepository.save(book);
+
+        return "返却完了";
+    }
 }
