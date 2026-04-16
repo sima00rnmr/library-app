@@ -10,4 +10,10 @@ public class HomeController {
     public String home() {
         return "forward:/home/index.html";
     }
+    @GetMapping("/rent")
+    public String rent() {
+        return "rent";
+    }
+ 
 }
+//ページは作成まだ
