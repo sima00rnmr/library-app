@@ -88,8 +88,13 @@ public class RentalController {
             v.setBookTitle(book.getTitle());
             v.setQrCode(book.getQrCode());
             v.setUserId(r.getUserId());
+            v.setRentedAt(r.getRentedAt());
 
             return v;
         }).toList();
+    }
+    @GetMapping("/list")
+    public String list() {
+        return "forward:/list/index.html";
     }
 }
